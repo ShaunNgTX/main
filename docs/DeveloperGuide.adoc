@@ -60,7 +60,7 @@ Each of the four components
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
-image::LogicClassDiagram.png[]
+image::LogicClassDiagram2.png[]
 
 [discrete]
 ==== How the architecture components interact with each other
@@ -180,8 +180,8 @@ image::ModelClassDiagram2.png[]
 
 The `Model`,
 
-* stores a `QuestionBank` object that represents the `QuestionBank`.
-* stores the `Question Bank` data.
+* stores a `RevisionTool` object that represents the `RevisionTool`.
+* stores the `Revision Tool` data.
 * exposes an unmodifiable `ObservableList<Answerable>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 //end::shaun-designmodel[]
@@ -239,7 +239,7 @@ This section describes some noteworthy details on how certain features are imple
 === Add `Answerable` feature
 ==== Implementation
 
-The add `Answerable`s mechanism is facilitated by `AddCommand`.
+The add `Answerable`s mechanism is facilitated by AddCommand`.
 It extends `Command` that will read a user command and execute the command result.
 Additionally, it implements the following operations:
 
@@ -249,9 +249,9 @@ Additionally, it implements the following operations:
 
 These operations are exposed in the `Model` interface as `Model#addMcqCommand()`, `Model#addTfCommand()` and `Model#addShortAnsCommand()` respectively.
 
-Given below is an example usage scenario and how the add `Answerable`s mechanism behaves at each step.
+Given below is an example usage scenario and how the add `Answerable's` mechanism behaves at each step.
 
-Step 1. The user types `add type/mcq q/"string of `Answerable`" x/option1 x/option2 y/option3 x/option4 cat/[UML] diff/[easy]`, this command adds a easy difficulty mcq `Answerable` about UML with 4 options and option3 being the correct answer.
+Step 1. The user types `add type/mcq q/<string of Answerable> x/option1 x/option2 y/option3 x/option4 cat/[UML] diff/[easy]`, this command adds a easy difficulty mcq `Answerable` about UML with 4 options and option3 being the correct answer.
 
 image::InitialState.png[]
 
@@ -259,7 +259,7 @@ Step 2. The command is being parse into the parser and the AddCommand object of 
 
 image::FirstState.png[]
 
-Step 3. The AddCommand object will call its `addMcq()` method, this method will read the command and store the `Answerable` with the answers into the `test bank` accordingly.
+Step 3. The AddCommand object will call its `addMcq()` method, this method will read the command and store the `Answerable` with the answers into the `question bank` accordingly.
 
 image::SecondState.png[]
 
@@ -527,7 +527,7 @@ image::AutoComplete2.png[]
 
 //tag::junxian-list[]
 === List feature
-ListCommand` extends `Command` that will read in user command and execute the command result. User can filter by `Catergory` and/or `Difficulty`
+`ListCommand` extends `Command` that will read in user command and execute the command result. User can filter by `Catergory` and/or `Difficulty`
 
 ==== Design Considerations
 

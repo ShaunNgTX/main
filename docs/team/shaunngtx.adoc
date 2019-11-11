@@ -70,6 +70,7 @@ as a form of "Restart", as most of our default questions are taken from the week
 
 == Contributions to the User Guide
 
+
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
@@ -107,12 +108,29 @@ arrow keys and hit kbd:[Enter] to complete the command.
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+==== Overview of Logic Component
+
+[[fig-LogicClassDiagram]]
+.Structure of the Logic Component
+image::LogicClassDiagram2.png[]
+
+*API* :
+link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+
+.  `Logic` uses the `ParserManager` class to parse the user command.
+.  This results in a `Command` object which is executed by the `LogicManager`.
+.  The command execution can affect the `Model` (e.g. adding a question).
+.  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+.  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
+.  In quiz mode, the `CommandResult` object is also used to determine whether the user's answer is correct.
 
 [[Design-Model]]
 === Model component
 
 .Structure of the Model Component
 image::ModelClassDiagram2.png[]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
 The `Model`,
 
@@ -126,6 +144,8 @@ The `Model`,
 
 .Structure of the Storage Component
 image::StorageClassDiagram2.png[]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -185,8 +205,12 @@ image::AutoComplete2.png[]
 .  RevisionTool should be able to run without any internet connectivity.
 .  RevisionTool does not require any further installation upon downloading the jar file.
 
+
 [appendix]
 == Glossary
+
+[[mainstream-os]] Mainstream OS::
+Windows, Linux, Unix, OS-X
 
 [[Answerables]] Answerables::
 A set of question answers, which includes :
@@ -204,6 +228,20 @@ Given below are instructions to test the app manually.
 
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+
+=== Launch and Shutdown
+
+. Initial launch
+
+.. Download the jar file and copy into an empty folder
+.. Double-click the jar file +
+   Expected: Shows the GUI with a set of sample answerables. The window size may not be optimum.
+
+. Saving window preferences
+
+.. Resize the window to an optimum size. Move the window to a different location. Close the window by using the `x` button at the top right hand corner or by using the command `exit`.
+.. Re-launch the app by double clicking the jar file. +
+   Expected: The most recent window size and location is retained.
 
 === Adding an answerable
 
@@ -225,3 +263,36 @@ Expected: new SAQ answerable will be created and appended at the bottom of the l
 . Adding an Answerable that already exist in the Revision Tool
 .. Test case: `add type/mcq q/What is 1 + 1 y/2 x/1 x/3 x/4 cat/easy diff/1` +
 Expected: No new answerable will be added as the question already exist in the Revision Tool. An error message will be thrown, informing users that the answerable already exist in the Revision Tool.
+
+=== Deleting an answerable
+
+. Deleting an answerable while all answerables are listed
+
+.. Prerequisites: List all answerables using the `list` command. Multiple answerables in the list.
+.. Test case: `delete 1` +
+   Expected: First answerable is deleted from the list. Details of the deleted answerable shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `delete 0` +
+   Expected: No answerable is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+   Expected: Similar to previous.
+
+=== Starting quiz
+
+. Starting a quiz
+.. Test case: `start mode/normal` +
+Expected: Start quiz window will pop up with a question showing under the command box and the answers in the result box further below. Answer the questions using the CLI accordingly to see the progress bar move till quiz completion. Users will be prompted if he wishes to proceed to level 2.
+.. Test case: `start mode/arcade` +
+Expected: Start quiz window will pop up similar to previous test case. The only difference would be that once the quiz proceeds and an incorrect answer is input, the quiz ends and the score will be shown. This is the "hard mode" of our quiz mode.
+.. Test case `start mode/custom timer/3` +
+Expected: Start quiz window will pop up similar to previous test case. The difference here will be the timer. Instead of the 30 seconds timer per question, the new timer (seen at the bottom right beside the status progress bar) will be at 3 seconds as set by the user.
+
+=== Saving data
+
+. Dealing with missing/corrupted data files
+
+.. If there is a missing answerables data file, the RevisionTool will automatically create a default data file with all the default answerables inside.
+.. If there is a corrupted answerable data file, the RevisionTool will automatically start with a list of empty file. Users will then be able to use the `#restoreCommand` here to get a list of default answerables or alternatively, create a new set of answerables manually.
+
+. To identify missing/corrupted data files:
+.. `.\data\revisiontool.json`
+.. `.\data\history.json`
