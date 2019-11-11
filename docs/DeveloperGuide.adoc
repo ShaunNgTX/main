@@ -148,7 +148,7 @@ an extra `Answerable` argument on top of the user input String in order to carry
 
 As different commands are accepted in Configuration and Quiz Mode, the `ParserManager` class uses overloaded methods
 (`parseCommand(String)` and `parseCommand(String, Answerable)` to determine the valid commands in each mode. If a Configuration Mode
-command such as `add` were to be used in Quiz Mode, the ParserManager would deem the the command as invalid. +
+command such as `add` were to be used in Quiz Mode, the ParserManager would deem the command as invalid. +
 
 With reference to Figure 6, The following are the parsers used in each mode:
 
@@ -872,7 +872,7 @@ These instructions only provide a starting point for testers to work on; testers
 . Adding an MCQ to the current list.
 
 .. Test case: `add type/mcq q/What is 1 + 1 y/2 x/1 x/3 x/4 cat/easy diff/1` +
-Expected: new MCQ answerable will be created and appended at the bottom of the list. Details of the the added answerable will be shown at the bottom of the list, and the correct answer will be highlighted in green.
+Expected: new MCQ answerable will be created and appended at the bottom of the list. Details of the added answerable will be shown at the bottom of the list, and the correct answer will be highlighted in green.
 
 . Adding a True False to the current list
 
