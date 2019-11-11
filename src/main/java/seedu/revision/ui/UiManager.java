@@ -1,5 +1,7 @@
 package seedu.revision.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -11,8 +13,6 @@ import seedu.revision.MainApp;
 import seedu.revision.commons.core.LogsCenter;
 import seedu.revision.commons.util.StringUtil;
 import seedu.revision.logic.Logic;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * The manager of the UI component.

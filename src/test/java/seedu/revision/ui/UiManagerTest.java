@@ -1,8 +1,8 @@
 package seedu.revision.ui;
 
-import org.junit.jupiter.api.Test;
-
 import static seedu.revision.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * @@author khiangleon

@@ -1,22 +1,19 @@
 package seedu.revision.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.revision.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.revision.model.quiz.Statistics;
 
 /**
  * @@author khiangleon
  */
 public class JsonAdaptedStatisticsTest {
-    @Test
-    public void test() throws Exception {
-        assertEquals(1, 1);
-    }
-
 
     @Test
-    public void toModelType() throws Exception {
-        assertEquals(1, 1);
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new JsonAdaptedStatistics(new Statistics(null)));
     }
 
 }
