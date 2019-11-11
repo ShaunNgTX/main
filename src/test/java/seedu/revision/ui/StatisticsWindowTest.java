@@ -23,7 +23,7 @@ import seedu.revision.stubs.HistoryStub;
 import seedu.revision.stubs.StorageStub;
 
 /**
- * @author khiangleon
+ * @@author khiangleon
  */
 @ExtendWith(ApplicationExtension.class)
 public class StatisticsWindowTest {

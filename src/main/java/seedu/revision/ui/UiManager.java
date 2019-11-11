@@ -12,6 +12,8 @@ import seedu.revision.commons.core.LogsCenter;
 import seedu.revision.commons.util.StringUtil;
 import seedu.revision.logic.Logic;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * The manager of the UI component.
  */
@@ -27,6 +29,7 @@ public class UiManager implements Ui {
 
     public UiManager(Logic logic) {
         super();
+        requireNonNull(logic);
         this.logic = logic;
     }
 
