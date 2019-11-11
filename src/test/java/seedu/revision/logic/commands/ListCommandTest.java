@@ -16,6 +16,7 @@ import seedu.revision.model.ModelManager;
 import seedu.revision.model.UserPrefs;
 
 /**
+ * @author khiangleon
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
 public class ListCommandTest {
