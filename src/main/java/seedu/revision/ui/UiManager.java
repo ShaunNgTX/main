@@ -1,5 +1,7 @@
 package seedu.revision.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -27,6 +29,7 @@ public class UiManager implements Ui {
 
     public UiManager(Logic logic) {
         super();
+        requireNonNull(logic);
         this.logic = logic;
     }
 
