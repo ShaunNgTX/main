@@ -1,13 +1,17 @@
 package seedu.revision.ui;
 
-import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
+
 import seedu.revision.logic.Logic;
 import seedu.revision.logic.LogicManager;
 import seedu.revision.model.Model;
@@ -18,16 +22,14 @@ import seedu.revision.storage.Storage;
 import seedu.revision.stubs.HistoryStub;
 import seedu.revision.stubs.StorageStub;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 /**
  * @author khiangleon
  */
 @ExtendWith(ApplicationExtension.class)
 public class HistoryWindowTest {
 
-    private HistoryWindow HistoryWindow;
     private static final String COMMAND_EXIT = "exit";
+    private HistoryWindow historyWindow;
 
     @BeforeAll
     public static void runHeadless() {
@@ -48,8 +50,8 @@ public class HistoryWindowTest {
         RevisionTool testRevisionTool = new RevisionTool();
         Model model = new ModelManager(testRevisionTool, new UserPrefs(), new HistoryStub());
         Logic logic = new LogicManager(model, storageStub);
-        HistoryWindow = new HistoryWindow(stage, logic);
-        HistoryWindow.fillInnerParts();
+        historyWindow = new HistoryWindow(stage, logic);
+        historyWindow.fillInnerParts();
         stage.show();
     }
 
