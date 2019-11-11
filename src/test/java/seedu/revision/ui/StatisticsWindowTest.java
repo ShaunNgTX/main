@@ -1,13 +1,17 @@
 package seedu.revision.ui;
 
-import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
+
 import seedu.revision.logic.Logic;
 import seedu.revision.logic.LogicManager;
 import seedu.revision.model.Model;
@@ -17,8 +21,6 @@ import seedu.revision.model.UserPrefs;
 import seedu.revision.storage.Storage;
 import seedu.revision.stubs.HistoryStub;
 import seedu.revision.stubs.StorageStub;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author khiangleon
