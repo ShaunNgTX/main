@@ -301,10 +301,66 @@ public class StartQuizWindow extends ParentWindow {
                 + "(normal / arcade / custom) to try another quiz!");
     }
 
-
     /**
      *
      * @throws ParseException when uses attempts to skip question using internal command.
+     */
+    @Override
+    protected CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+        try {
+
+            if (commandText.equals(TIMER_UP_SKIP_QUESTION) && !timer.isTimeUp()) {
+                throwParseExceptionWhenUserSkipsQuestion();
+            }
+
+            CommandResult commandResult = logic.execute(commandText, currentAnswerable);
+            if (commandResult.isCorrect()) {
+                totalScore++;
+                statistics.updateStatistics(currentAnswerable, quizList);
+            }
+
+            timer.resetTimer();
+
+            if (commandResult.isExit()) {
+                handleExit();
+                return new CommandResultBuilder().build();
+            }
+
+            if (!commandResult.isCorrect() && mode.value.equals(Modes.ARCADE.toString())) {
+                handleEnd(currentAnswerable);
+                return new CommandResultBuilder().build();
+            }
+
+            if (!answerableIterator.hasNext()) {
+                handleEnd(currentAnswerable);
+                return new CommandResultBuilder().build();
+            }
+
+            currentProgressIndex.set(getCurrentProgressIndex() + 1);
+
+            previousAnswerable = currentAnswerable;
+            currentAnswerable = answerableIterator.next();
+
+            if (previousAnswerable.getDifficulty().compareTo(currentAnswerable.getDifficulty()) < 0) {
+                handleNextLevel(previousAnswerable, currentAnswerable);
+            }
+
+            answerableListPanelPlaceholder.getChildren().remove(answersGridPane.getRoot());
+            setAnswerGridPaneByType(currentAnswerable);
+            answersGridPane.updateAnswers(currentAnswerable);
+
+            questionDisplay.setFeedbackToUser(currentAnswerable.getQuestion().toString());
+
+            return commandResult;
+        } catch (CommandException | ParseException e) {
+            questionDisplay.setFeedbackToUser(currentAnswerable.getQuestion().toString() + "\n\n" + e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Throws exception according to question type.
+     * @throws ParseException
      */
     private void throwParseExceptionWhenUserSkipsQuestion() throws ParseException {
         if (currentAnswerable instanceof Mcq) {
